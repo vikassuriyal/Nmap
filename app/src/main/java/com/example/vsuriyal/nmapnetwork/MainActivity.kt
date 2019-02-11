@@ -24,6 +24,7 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v4.content.ContextCompat.getSystemService
+import com.example.vsuriyal.nmapnetwork.Utils.Companion.makedir
 import kotlin.properties.Delegates
 
 
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+        makedir(dest)
         BackGroundTask(edit,this,progress,dest).execute()
 
     }
@@ -140,16 +142,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 zin.close()
             } catch (e: Exception) {
+                System.out.print(e.message)
             }
 
-        }
-
-        fun makedir(dir: String) {
-            val myDir = File(dir)
-
-            if (!myDir.isDirectory) {
-                myDir.mkdirs()
-            }
         }
 
         fun installPlugin(str:String) {
